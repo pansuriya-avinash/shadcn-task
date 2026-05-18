@@ -65,7 +65,7 @@ const SectionHeading = ({
       {description != null ? (
         <p
           className={cn(
-            "text-base font-normal text-foreground sm:text-lg lg:text-xl",
+            "text-base font-normal text-muted sm:text-lg lg:text-xl",
             descriptionMaxWidthClass[descriptionMaxWidth],
             "mx-auto",
             descriptionClassName,

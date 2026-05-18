@@ -73,7 +73,7 @@ const Header = () => {
                   className={cn(
                     navigationMenuTriggerStyle(),
                     "bg-transparent",
-                    "text-base font-normal tracking-normal text-foreground",
+                    "text-base font-normal tracking-normal text-muted",
                     "hover:bg-transparent hover:text-primary",
                     "focus:bg-transparent focus:text-primary",
                   )}
@@ -110,7 +110,7 @@ const Header = () => {
                 variant="ghost"
                 size="icon"
                 aria-label="Open navigation menu"
-                className="text-foreground"
+                className="text-muted"
               >
                 <Menu className="h-5 w-5" />
               </Button>
@@ -147,7 +147,7 @@ const Header = () => {
                       className={cn(
                         "block rounded-lg px-3 py-2",
                         "text-base font-normal",
-                        "text-foreground",
+                        "text-muted",
                         "transition-colors duration-200",
                         "hover:bg-accent hover:text-accent-foreground",
                       )}

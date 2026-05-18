@@ -3,8 +3,8 @@
 import * as React from 'react';
 import { motion } from 'framer-motion';
 
+import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { Card } from '@/components/ui/card';
 
 import FoodSlide from './food-slide';
 import { foodSlides } from './slider-data';
@@ -17,8 +17,11 @@ interface FoodSliderProps {
   isTransitioning: boolean;
 }
 
-const FoodSlider = ({ activeIndex, onIndexChange, isTransitioning }: FoodSliderProps) => {
-
+function FoodSlider({
+  activeIndex,
+  onIndexChange,
+  isTransitioning,
+}: FoodSliderProps) {
   const infiniteSlides = React.useMemo(
     () => [...foodSlides, ...foodSlides],
     []
@@ -41,16 +44,17 @@ const FoodSlider = ({ activeIndex, onIndexChange, isTransitioning }: FoodSliderP
   return (
     <Card
       className={cn(
-        'relative overflow-hidden py-2',
         'border-none bg-transparent shadow-none'
       )}
     >
-      <div className='relative overflow-hidden'>
+      <CardContent
+        className={cn(
+          'relative overflow-hidden p-0 py-2'
+        )}
+      >
         <motion.div
           animate={{
-            x: `calc(50% - ${
-              activeIndex * SLIDE_WIDTH + 110
-            }px)`,
+            x: `calc(50% - ${activeIndex * SLIDE_WIDTH + 110}px)`,
           }}
           transition={{
             duration: isTransitioning ? 0.7 : 0,
@@ -66,13 +70,13 @@ const FoodSlider = ({ activeIndex, onIndexChange, isTransitioning }: FoodSliderP
             <FoodSlide
               key={`${item.id}-${index}`}
               item={item}
-              active={actualActiveIndex === (index % foodSlides.length)}
+              active={actualActiveIndex === index % foodSlides.length}
             />
           ))}
         </motion.div>
-      </div>
+      </CardContent>
     </Card>
   );
-};
+}
 
 export default FoodSlider;

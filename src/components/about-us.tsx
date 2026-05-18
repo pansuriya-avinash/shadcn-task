@@ -41,7 +41,7 @@ const StatCard = ({ stat, className }: StatCardProps) => {
 
         <p
           className={cn(
-            "text-base font-normal leading-6 text-foreground",
+            "text-base font-normal leading-6 text-muted",
             "sm:text-lg",
           )}
         >
@@ -54,7 +54,7 @@ const StatCard = ({ stat, className }: StatCardProps) => {
 
 const AboutUs = () => {
   return (
-    <section className={cn("relative w-full overflow-hidden", "bg-footer")}>
+    <section className={cn("relative w-full overflow-hidden", "bg-foreground")}>
       <DiagonalCut direction="top" />
 
       <div

@@ -1,6 +1,5 @@
 import { FoodSlideType } from './types';
 import placeholderImage from '@/public/hero-img.png';
-import placeholderImage2 from '@/public/slider1.png';
 import placeholderImage3 from '@/public/slider2.png';
 import placeholderImage4 from '@/public/slider3.png';
 import placeholderImage5 from '@/public/slider4.png';
@@ -15,7 +14,7 @@ export const foodSlides: FoodSlideType[] = [
   {
     id: 2,
     title: 'Pasta Mix',
-    image: placeholderImage2,
+    image: placeholderImage5,
   },
   {
     id: 3,

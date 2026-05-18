@@ -17,7 +17,7 @@ const socialLinks = [
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
         <path
           d="M15 1.6665H12.5C11.395 1.6665 10.3352 2.10549 9.55376 2.88689C8.77236 3.66829 8.33337 4.7281 8.33337 5.83317V8.33317H5.83337V11.6665H8.33337V18.3332H11.6667V11.6665H14.1667L15 8.33317H11.6667V5.83317C11.6667 5.61216 11.7545 5.4002 11.9108 5.24391C12.0671 5.08763 12.279 4.99984 12.5 4.99984H15V1.6665Z"
-          stroke="#300406"
+          stroke="var(--muted)"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -32,7 +32,7 @@ const socialLinks = [
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
         <path
           d="M14.5833 5.4165H14.5916M5.83329 1.6665H14.1666C16.4678 1.6665 18.3333 3.53198 18.3333 5.83317V14.1665C18.3333 16.4677 16.4678 18.3332 14.1666 18.3332H5.83329C3.53211 18.3332 1.66663 16.4677 1.66663 14.1665V5.83317C1.66663 3.53198 3.53211 1.6665 5.83329 1.6665ZM13.3333 9.47484C13.4361 10.1684 13.3177 10.8767 12.9948 11.499C12.6718 12.1213 12.1609 12.626 11.5346 12.9412C10.9084 13.2564 10.1987 13.3662 9.50645 13.2548C8.81423 13.1434 8.17476 12.8166 7.67899 12.3208C7.18322 11.825 6.8564 11.1856 6.74502 10.4933C6.63363 9.80113 6.74335 9.09142 7.05856 8.46515C7.37378 7.83888 7.87845 7.32795 8.50078 7.00504C9.12311 6.68212 9.83142 6.56366 10.525 6.6665C11.2324 6.77141 11.8873 7.10106 12.393 7.60676C12.8987 8.11246 13.2284 8.7674 13.3333 9.47484Z"
-          stroke="#300406"
+          stroke="var(--muted)"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -47,7 +47,7 @@ const socialLinks = [
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
         <path
           d="M18.3333 3.33319C18.3333 3.33319 17.75 5.08319 16.6666 6.16652C18 14.4999 8.83329 20.5832 1.66663 15.8332C3.49996 15.9165 5.33329 15.3332 6.66663 14.1665C2.49996 12.9165 0.416626 7.99986 2.49996 4.16652C4.33329 6.33319 7.16663 7.58319 9.99996 7.49986C9.24996 3.99986 13.3333 1.99986 15.8333 4.33319C16.75 4.33319 18.3333 3.33319 18.3333 3.33319Z"
-          stroke="#300406"
+          stroke="var(--muted)"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -69,7 +69,7 @@ const socialLinks = [
         />
         <path
           d="M8.33334 12.5L12.5 10L8.33334 7.5V12.5Z"
-          stroke="#300406"
+          stroke="var(--muted)"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -82,7 +82,7 @@ const socialLinks = [
 
 export const Footer = () => {
   return (
-    <footer className={cn("w-full", "bg-footer")}>
+    <footer className={cn("w-full", "bg-foreground")}>
       <FadeIn margin="-40px 0px">
         <div>
           <div
@@ -126,7 +126,7 @@ export const Footer = () => {
                     "text-base font-normal",
                     "text-muted-foreground",
                     "transition-colors duration-200",
-                    "hover:text-foreground",
+                    "hover:text-muted",
                   )}
                 >
                   {item.name}
@@ -168,7 +168,7 @@ export const Footer = () => {
             <p
               className={cn(
                 "text-center text-base font-normal",
-                "text-foreground",
+                "text-muted",
               )}
             >
               © 2025 Bistro. Made with ❤️ for a better taste.

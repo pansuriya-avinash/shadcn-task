@@ -75,7 +75,7 @@ const Hero = () => {
                 variants={heroItem}
                 className={cn(
                   "text-base sm:text-lg lg:text-xl font-normal",
-                  "text-foreground",
+                  "text-muted",
                   "max-w-xl",
                   "mb-5",
                 )}
@@ -169,7 +169,7 @@ const Hero = () => {
               "mt-4",
               "flex items-start gap-4",
               "p-4 rounded-lg",
-              "bg-muted/50",
+              "bg-background",
             )}
           >
             <div className="shrink-0">

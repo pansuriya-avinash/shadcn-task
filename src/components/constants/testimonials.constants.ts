@@ -8,7 +8,7 @@ export const TESTIMONIALS: Testimonial[] = [
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
     rating: 4.5,
     feedback:
-      "Absolutely amazing experience! The food was exquisite, and the service was impeccable. I highly recommend the grilled herb chicken — it's a must-try!",
+      "Absolutely amazing experience! The food was exquisite, and the service was impeccable. ",
   },
   {
     id: '2',

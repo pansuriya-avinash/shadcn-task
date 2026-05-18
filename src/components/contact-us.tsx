@@ -21,7 +21,7 @@ import {
 
 const ContactUs = () => {
   return (
-    <section className={cn("w-full bg-primary/5")}>
+    <section className={cn("w-full bg-foreground")}>
       <DiagonalCut direction="top" />
 
       <div
@@ -88,7 +88,7 @@ const ContactUs = () => {
               <p
                 className={cn(
                   "text-base leading-7 font-normal lg:text-lg",
-                  "text-foreground",
+                  "text-muted",
                 )}
               >
                 We would love to hear from you. Whether you have a question,

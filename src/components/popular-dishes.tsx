@@ -40,18 +40,18 @@ const PopularDishes = () => {
               <DishCard
                 dish={dish}
                 cardContaine={
-                  <CardContent className="p-4 sm:p-5 bg-footer">
+                  <CardContent className="p-4 sm:p-5 bg-foreground">
                     <h3 className="mb-3 text-base font-semibold leading-snug text-card-foreground sm:text-lg">
                       {dish.title}
                     </h3>
 
                     <Separator className="mb-3" />
 
-                    <p className="mb-1.5 text-base font-medium text-foreground">
+                    <p className="mb-1.5 text-base font-medium text-muted">
                       {dish.category}
                     </p>
 
-                    <p className="line-clamp-2 text-base font-normal leading-relaxed text-foreground">
+                    <p className="line-clamp-2 text-base font-normal leading-relaxed text-muted">
                       {dish.description}
                     </p>
                   </CardContent>

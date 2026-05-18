@@ -45,12 +45,12 @@ const NewItems = () => {
               <DishCard
                 dish={item}
                 cardContaine={
-                  <CardContent className="p-4 sm:p-5 bg-footer h-full">
+                  <CardContent className="p-4 sm:p-5 bg-foreground h-full">
                     <h3 className="mb-3 text-base font-semibold leading-snug text-card-foreground sm:text-lg">
                       {item.title}
                     </h3>
 
-                    <p className="mb-1.5 text-base font-medium text-foreground h-[60px]">
+                    <p className="mb-1.5 text-base font-medium text-muted h-[60px]">
                       {item.description}
                     </p>
 
