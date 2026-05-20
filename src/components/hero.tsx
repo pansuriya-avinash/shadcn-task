@@ -94,32 +94,50 @@ const Hero = () => {
                 "items-start sm:items-center",
               )}
             >
-              <Button
-                size="lg"
-                className={cn(
-                  "bg-primary text-primary-foreground",
-                  "hover:bg-primary/90",
-                  "px-6 py-2",
-                  "text-base font-medium",
-                  "rounded-full",
-                )}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2, ease: EASE_OUT_EXPO }}
               >
+                <Button
+                  size="lg"
+                  className={cn(
+                    "group relative overflow-hidden rounded-full px-6 py-2 text-base font-medium",
+                    "bg-primary text-primary-foreground",
+                    "before:absolute before:inset-0 before:rounded-[inherit]",
+                    "before:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%,transparent_100%)]",
+                    "before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0]",
+                    "before:bg-no-repeat",
+                    "before:transition-[background-position_0s_ease] before:duration-1000",
+                    "hover:before:bg-[position:-100%_0,0_0]",
+                    "dark:before:bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.2)_50%,transparent_75%,transparent_100%)]",
+                    "transition-all duration-300",
+                    "hover:bg-[color-mix(in_oklab,var(--primary)_90%,transparent)] hover:shadow-lg hover:shadow-primary/40",
+                  )}
+                >
                 Order now
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className={cn(
-                  "text-primary",
-                  "bg-primary/10 hover:bg-primary/20 hover:text-primary",
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2, ease: EASE_OUT_EXPO }}
+              >
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className={cn(
+                    "text-primary",
+                    "bg-primary/10 hover:bg-primary/20 hover:text-primary",
                   "px-6 py-2",
                   "text-base font-medium",
                   "rounded-full",
-                )}
-              >
-                Book table
-              </Button>
+                  )}
+                >
+                  Book table
+                </Button>
+              </motion.div>
             </motion.div>
           </motion.div>
 

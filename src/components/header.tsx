@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Menu } from "lucide-react";
 import { motion } from "framer-motion";
 
-import { EASE_OUT_EXPO } from "@/lib/animation";
+import { EASE_BACK_OUT, EASE_IN_OUT, EASE_OUT_EXPO } from "@/lib/animation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -103,7 +103,7 @@ export const useScrollNavigation = () => {
     };
   }, [isScrolling]);
 
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleScroll = (e: React.MouseEvent<HTMLElement>, href: string) => {
     if (href.startsWith("#")) {
       e.preventDefault();
       const id = href.slice(1);
@@ -190,18 +190,29 @@ const Header = () => {
 
         <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-3">
           <ThemeToggle />
-          <Button
-            size="lg"
-            className={cn(
-              "bg-primary text-primary-foreground",
-              "hover:bg-primary/90",
-              "px-4 py-2",
-              "text-sm font-medium",
-              "rounded-full",
-            )}
+          <motion.div
+            transition={{ duration: 0.2, ease: EASE_BACK_OUT }}
           >
-            Book table
-          </Button>
+            <Button
+              size="lg"
+              onClick={(e) => handleScroll(e, "#contact")}
+              className={cn(
+                "group relative ml-4 w-fit overflow-hidden rounded-full px-4 py-2 text-base",
+                "bg-primary text-sm font-medium text-primary-foreground",
+                "before:absolute before:inset-0 before:rounded-[inherit]",
+                "before:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%,transparent_100%)]",
+                "before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0]",
+                "before:bg-no-repeat",
+                "before:transition-[background-position_0s_ease] before:duration-1000",
+                "hover:before:bg-[position:-100%_0,0_0]",
+                "dark:before:bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.2)_50%,transparent_75%,transparent_100%)]",
+                "transition-all duration-300", 
+                "hover:bg-[color-mix(in_oklab,var(--primary)_90%,transparent)]",
+              )}
+            >
+              Book table
+            </Button>
+          </motion.div>
         </div>
 
         <div className="flex items-center gap-1 lg:hidden">
@@ -228,7 +239,6 @@ const Header = () => {
                 Site navigation links and actions
               </SheetDescription>
 
-              {/* Sheet header with logo */}
               <div className="border-b border-border px-6 py-4">
                 <a
                   href="#hero"
@@ -269,17 +279,30 @@ const Header = () => {
 
               <div className="border-t border-border px-6 py-4">
                 <SheetClose asChild>
-                  <Button
-                    size="lg"
-                    className={cn(
-                      "w-full rounded-full",
-                      "bg-primary text-primary-foreground",
-                      "hover:bg-primary/90",
-                      "text-sm font-medium",
-                    )}
+                  <motion.div
+                    transition={{ duration: 0.2, ease: EASE_OUT_EXPO }}
                   >
-                    Book table
-                  </Button>
+                    <Button
+                      size="lg"
+                      onClick={(e) => handleScroll(e, "#contact")}
+                      className={cn(
+                        "group relative w-full overflow-hidden rounded-full text-base",
+                        "bg-primary text-sm font-medium text-primary-foreground",
+                        "before:absolute before:inset-0 before:rounded-[inherit]",
+                        "before:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%,transparent_100%)]",
+                        "before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0]",
+                        "before:bg-no-repeat",
+                        "before:transition-[background-position_0s_ease] before:duration-1000",
+                        "hover:before:bg-[position:-100%_0,0_0]",
+                        "dark:before:bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.2)_50%,transparent_75%,transparent_100%)]",
+                        "transition-all duration-300", // Keep existing transition for other properties
+                        "hover:bg-[color-mix(in_oklab,var(--primary)_90%,transparent)] hover:shadow-xl hover:shadow-primary/40",
+                      )}
+                    >
+                      {/* Shine effect */}
+                      Book table
+                    </Button>
+                  </motion.div>
                 </SheetClose>
               </div>
             </SheetContent>

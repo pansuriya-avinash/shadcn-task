@@ -1,5 +1,9 @@
+
+"use client";
+
 import * as React from "react";
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 import SectionHeading from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
@@ -8,6 +12,7 @@ import Image from "next/image";
 import aboutUsImage from "@/public/about-img.jpg";
 import DiagonalCut from "./ui/diagonalCut";
 import { StatCardProps } from "./types";
+import { EASE_OUT_EXPO } from "@/lib/animation";
 import { stats } from "./constants";
 import {
   FadeUp,
@@ -87,19 +92,27 @@ const AboutUs = () => {
         </FadeUp>
 
         <FadeUp delay={0.15}>
-          <Button
-            size="lg"
-            className={cn(
-              "mt-4 rounded-full",
-              "bg-primary text-primary-foreground",
-              "px-6 py-2 text-base font-medium",
-              "shadow-lg shadow-primary/20",
-              "hover:bg-primary/90",
-            )}
-          >
-            Read more
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          <motion.div transition={{ duration: 0.2, ease: EASE_OUT_EXPO }}>
+            <Button
+              size="lg"
+              className={cn(
+                "group relative mt-4 overflow-hidden rounded-full px-6 py-2 text-base font-medium",
+                "bg-primary text-primary-foreground",
+                "before:absolute before:inset-0 before:rounded-[inherit]",
+                "before:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%,transparent_100%)]",
+                "before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0]",
+                "before:bg-no-repeat",
+                "before:transition-[background-position_0s_ease] before:duration-1000",
+                "hover:before:bg-[position:-100%_0,0_0]",
+                "dark:before:bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.2)_50%,transparent_75%,transparent_100%)]",
+                "transition-all duration-300",
+                "hover:bg-[color-mix(in_oklab,var(--primary)_90%,transparent)] hover:shadow-lg hover:shadow-primary/40",
+              )}
+            >
+              Read more
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </motion.div>
         </FadeUp>
       </div>
       <div className={cn("relative mx-auto max-w-7xl", "px-0 sm:px-6 lg:px-8")}>
