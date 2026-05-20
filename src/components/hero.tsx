@@ -144,7 +144,7 @@ const Hero = () => {
           {/* ── Hero image ─────────────────────────────────────── */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={actualActiveIndex}
+              key={activeSlide.id}
               className="relative lg:min-h-97"
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}

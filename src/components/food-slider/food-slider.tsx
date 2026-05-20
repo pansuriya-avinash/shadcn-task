@@ -9,70 +9,81 @@ import { cn } from '@/lib/utils';
 import FoodSlide from './food-slide';
 import { foodSlides } from './slider-data';
 
-const SLIDE_WIDTH = 220;
-
 interface FoodSliderProps {
   activeIndex: number;
   onIndexChange: (index: number) => void;
   isTransitioning: boolean;
 }
 
+const AUTO_PLAY_DELAY = 2500;
+
 function FoodSlider({
   activeIndex,
   onIndexChange,
-  isTransitioning,
 }: FoodSliderProps) {
-  const infiniteSlides = React.useMemo(
-    () => [...foodSlides, ...foodSlides],
+  /**
+   * Triple slides for seamless looping
+   */
+  const loopSlides = React.useMemo(
+    () => [...foodSlides, ...foodSlides, ...foodSlides],
     []
   );
 
-  const nextSlide = React.useCallback(() => {
-    onIndexChange(activeIndex + 1);
-  }, [activeIndex, onIndexChange]);
-
+  /**
+   * Auto active item change
+   */
   React.useEffect(() => {
     const interval = setInterval(() => {
-      nextSlide();
-    }, 3500);
+      onIndexChange(
+        (activeIndex + 1) % foodSlides.length
+      );
+    }, AUTO_PLAY_DELAY);
 
     return () => clearInterval(interval);
-  }, [nextSlide]);
+  }, [activeIndex, onIndexChange]);
 
-  const actualActiveIndex = activeIndex % foodSlides.length;
+  const actualActiveIndex =
+    activeIndex % foodSlides.length;
 
   return (
-    <Card
-      className={cn(
-        'border-none bg-transparent shadow-none'
-      )}
-    >
-      <CardContent
-        className={cn(
-          'relative overflow-hidden p-0 py-2'
-        )}
-      >
+    <Card className='border-none bg-transparent shadow-none'>
+      <CardContent className='relative overflow-hidden p-0 py-4'>
+        {/* Left Fade */}
+        <div className='pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-background to-transparent' />
+
+        {/* Right Fade */}
+        <div className='pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-background to-transparent' />
+
         <motion.div
+          className={cn(
+            'flex w-max items-center gap-4',
+            'sm:gap-6',
+            'lg:gap-8'
+          )}
           animate={{
-            x: `calc(50% - ${activeIndex * SLIDE_WIDTH + 110}px)`,
+            x: ['0%', '-33.333%'],
           }}
           transition={{
-            duration: isTransitioning ? 0.7 : 0,
-            ease: 'easeInOut',
+            duration: 18,
+            ease: 'linear',
+            repeat: Infinity,
           }}
-          className={cn(
-            'flex items-center gap-4',
-            'sm:gap-6',
-            'lg:gap-10'
-          )}
         >
-          {infiniteSlides.map((item, index) => (
-            <FoodSlide
-              key={`${item.id}-${index}`}
-              item={item}
-              active={actualActiveIndex === index % foodSlides.length}
-            />
-          ))}
+          {loopSlides.map((item, index) => {
+            const originalIndex =
+              index % foodSlides.length;
+
+            return (
+              <FoodSlide
+                key={`${item.id}-${index}`}
+                item={item}
+                active={
+                  originalIndex ===
+                  actualActiveIndex
+                }
+              />
+            );
+          })}
         </motion.div>
       </CardContent>
     </Card>
