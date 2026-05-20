@@ -15,7 +15,7 @@ const DishCard = ({ dish, className, cardContaine }: DishCardProps) => {
       className={cn(
         "group overflow-hidden",
         "bg-card border border-border",
-        "transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
+        "hover:border-primary",
         className
       )}
     >
@@ -26,7 +26,6 @@ const DishCard = ({ dish, className, cardContaine }: DishCardProps) => {
           fill
           className={cn(
             "h-full w-full object-cover",
-            "transition-transform duration-500 group-hover:scale-105"
           )}
         />
       </div>
