@@ -6,7 +6,7 @@ import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 
 export function Offers() {
   return (
-    <section className={cn("w-full", "py-14 sm:py-16 lg:py-24")}>
+    <section id="offers" className={cn("w-full", "py-14 sm:py-16 lg:py-24")}>
       <div className={cn("mx-auto max-w-7xl", "px-4 sm:px-6 lg:px-8")}>
         <FadeUp>
           <div className={cn("mx-auto mb-12 max-w-3xl", "md:mb-16")}>

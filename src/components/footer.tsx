@@ -9,6 +9,7 @@ import { FadeIn } from "@/components/ui/motion";
 
 import logo from "../public/assets/logo.svg";
 import { NAVIGATION_ITEMS } from "./constants";
+import { useScrollNavigation } from "./header";
 
 const socialLinks = [
   {
@@ -81,6 +82,8 @@ const socialLinks = [
 ];
 
 export const Footer = () => {
+  const { handleScroll } = useScrollNavigation();
+
   return (
     <footer className={cn("w-full", "bg-foreground")}>
       <FadeIn margin="-40px 0px">
@@ -94,7 +97,8 @@ export const Footer = () => {
             )}
           >
             <a
-              href="#"
+              href="#hero"
+              onClick={(e) => handleScroll(e, "#hero")}
               className={cn(
                 "flex items-center rounded-md",
                 "focus-visible:outline-none",
@@ -122,6 +126,7 @@ export const Footer = () => {
                 <a
                   key={item.name}
                   href={item.href}
+                  onClick={(e) => handleScroll(e, item.href)}
                   className={cn(
                     "text-base font-normal",
                     "text-muted-foreground",

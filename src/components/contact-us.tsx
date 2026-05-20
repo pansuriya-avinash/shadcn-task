@@ -21,7 +21,7 @@ import {
 
 const ContactUs = () => {
   return (
-    <section className={cn("w-full bg-foreground")}>
+    <section id="contact" className={cn("w-full bg-foreground")}>
       <DiagonalCut direction="top" />
 
       <div

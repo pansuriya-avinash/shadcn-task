@@ -38,7 +38,7 @@ const Hero = () => {
   const activeSlide = foodSlides[actualActiveIndex];
 
   return (
-    <section className={cn("flex items-center", "bg-background")}>
+    <section id="hero" className={cn("flex items-center", "bg-background")}>
       <div
         className={cn(
           "mx-auto max-w-7xl",
@@ -111,7 +111,7 @@ const Hero = () => {
                 variant="outline"
                 size="lg"
                 className={cn(
-                  "border-primary/30 text-primary",
+                  "text-primary",
                   "bg-primary/10 hover:bg-primary/20 hover:text-primary",
                   "px-6 py-2",
                   "text-base font-medium",

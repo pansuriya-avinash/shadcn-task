@@ -29,7 +29,106 @@ import { cn } from "@/lib/utils";
 import logo from "../public/assets/logo.svg";
 import { NAVIGATION_ITEMS } from "./constants";
 
+export const useScrollNavigation = () => {
+  const [activeSection, setActiveSection] = React.useState("");
+  const [isScrolling, setIsScrolling] = React.useState(false);
+
+  React.useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -60% 0px",
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isScrolling) {
+            setActiveSection(`#${entry.target.id}`);
+          }
+        });
+      },
+      observerOptions,
+    );
+
+    NAVIGATION_ITEMS.forEach((item) => {
+      if (item.href.startsWith("#")) {
+        const id = item.href.slice(1);
+        const element = document.getElementById(id);
+        if (element) observer.observe(element);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, [isScrolling]);
+
+  // Fallback scroll-based detection for better synchronization
+  React.useEffect(() => {
+    let scrollTimeout: NodeJS.Timeout;
+
+    const handleWindowScroll = () => {
+      if (isScrolling) return;
+
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+        let currentSection = "";
+        NAVIGATION_ITEMS.forEach((item) => {
+          if (item.href.startsWith("#")) {
+            const id = item.href.slice(1);
+            const element = document.getElementById(id);
+            if (element) {
+              const { offsetTop, offsetHeight } = element;
+              if (
+                scrollPosition >= offsetTop &&
+                scrollPosition < offsetTop + offsetHeight
+              ) {
+                currentSection = item.href;
+              }
+            }
+          }
+        });
+
+        if (currentSection) {
+          setActiveSection(currentSection);
+        }
+      }, 50);
+    };
+
+    window.addEventListener("scroll", handleWindowScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleWindowScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, [isScrolling]);
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const id = href.slice(1);
+      const element = document.getElementById(id);
+      if (element) {
+        setIsScrolling(true);
+        setActiveSection(href);
+        window.history.pushState(null, "", href);
+
+        element.scrollIntoView({ behavior: "smooth" });
+
+        // Reset scrolling state after animation completes
+        setTimeout(() => {
+          setIsScrolling(false);
+        }, 800);
+      }
+    }
+  };
+
+  return { activeSection, handleScroll };
+};
+
 const Header = () => {
+  const { activeSection, handleScroll } = useScrollNavigation();
+
   return (
     <motion.header
       initial={{ y: -64, opacity: 0 }}
@@ -50,9 +149,10 @@ const Header = () => {
       >
         <div className="flex lg:flex-1">
           <a
-            href="#"
+            href="#hero"
             className="flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
+            onClick={(e) => handleScroll(e, "#hero")}
+            >
             <Image
               src={logo}
               alt="Bistro Logo"
@@ -70,12 +170,15 @@ const Header = () => {
               <NavigationMenuItem key={item.name}>
                 <NavigationMenuLink
                   href={item.href}
+                  active={activeSection === item.href}
+                  onClick={(e) => handleScroll(e, item.href)}
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "bg-transparent",
-                    "text-base font-normal tracking-normal text-muted",
-                    "hover:bg-transparent hover:text-primary",
-                    "focus:bg-transparent focus:text-primary",
+                    "bg-transparent rounded-full ",
+                    "text-base font-normal tracking-normal text-muted transition-all duration-200",
+                    "hover:bg-primary/10 hover:text-secondary-foreground",
+                    "focus:bg-primary/10 focus:text-secondary-foreground ",
+                    "data-[active]:bg-primary/10 data-[active]:text-secondary-foreground "
                   )}
                 >
                   {item.name}
@@ -127,7 +230,11 @@ const Header = () => {
 
               {/* Sheet header with logo */}
               <div className="border-b border-border px-6 py-4">
-                <a href="#" className="inline-flex items-center">
+                <a
+                  href="#hero"
+                  onClick={(e) => handleScroll(e, "#hero")}
+                  className="inline-flex items-center"
+                >
                   <Image
                     src={logo}
                     alt="Bistro Logo"
@@ -144,12 +251,14 @@ const Header = () => {
                   <SheetClose asChild key={item.name}>
                     <a
                       href={item.href}
+                      onClick={(e) => handleScroll(e, item.href)}
                       className={cn(
                         "block rounded-lg px-3 py-2",
                         "text-base font-normal",
-                        "text-muted",
                         "transition-colors duration-200",
-                        "hover:bg-accent hover:text-accent-foreground",
+                        activeSection === item.href
+                          ? "bg-primary/10 text-secondary-foreground"
+                          : "text-muted hover:bg-accent hover:text-accent-foreground"
                       )}
                     >
                       {item.name}

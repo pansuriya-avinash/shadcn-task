@@ -54,7 +54,10 @@ const StatCard = ({ stat, className }: StatCardProps) => {
 
 const AboutUs = () => {
   return (
-    <section className={cn("relative w-full overflow-hidden", "bg-foreground")}>
+    <section
+      id="about"
+      className={cn("relative w-full overflow-hidden", "bg-foreground")}
+    >
       <DiagonalCut direction="top" />
 
       <div

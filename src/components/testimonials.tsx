@@ -34,7 +34,10 @@ const Testimonials = () => {
   );
 
   return (
-    <section className={cn("w-full bg-background", "py-18 sm:py-24 lg:py-36")}>
+    <section
+      id="testimonials"
+      className={cn("w-full bg-background", "py-18 sm:py-24 lg:py-36")}
+    >
       <div className={cn("mx-auto max-w-7xl", "px-4 sm:px-6 lg:px-8")}>
         <div
           className={cn(
