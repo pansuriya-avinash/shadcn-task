@@ -4,4 +4,6 @@ export type FoodSlideType = {
   id: number;
   title: string;
   image: string | StaticImageData;
+  review: string;
+
 };
