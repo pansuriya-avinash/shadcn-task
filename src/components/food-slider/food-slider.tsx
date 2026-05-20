@@ -1,10 +1,17 @@
 'use client';
 
 import * as React from 'react';
+import Autoplay from 'embla-carousel-autoplay';
 import { motion } from 'framer-motion';
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from '@/components/ui/carousel';
+
 import { Card, CardContent } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
 
 import FoodSlide from './food-slide';
 import { foodSlides } from './slider-data';
@@ -12,38 +19,37 @@ import { foodSlides } from './slider-data';
 interface FoodSliderProps {
   activeIndex: number;
   onIndexChange: (index: number) => void;
-  isTransitioning: boolean;
 }
-
-const AUTO_PLAY_DELAY = 2500;
 
 function FoodSlider({
   activeIndex,
   onIndexChange,
 }: FoodSliderProps) {
-  /**
-   * Triple slides for seamless looping
-   */
-  const loopSlides = React.useMemo(
-    () => [...foodSlides, ...foodSlides, ...foodSlides],
-    []
+  const [api, setApi] = React.useState<CarouselApi>();
+
+  const plugin = React.useRef(
+    Autoplay({
+      delay: 2500,
+      stopOnInteraction: false,
+      stopOnMouseEnter: false,
+    })
   );
 
-  /**
-   * Auto active item change
-   */
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      onIndexChange(
-        (activeIndex + 1) % foodSlides.length
-      );
-    }, AUTO_PLAY_DELAY);
+    if (!api) return;
 
-    return () => clearInterval(interval);
-  }, [activeIndex, onIndexChange]);
+    const onSelect = () => {
+      onIndexChange(api.selectedScrollSnap());
+    };
 
-  const actualActiveIndex =
-    activeIndex % foodSlides.length;
+    onSelect();
+
+    api.on('select', onSelect);
+
+    return () => {
+      api.off('select', onSelect);
+    };
+  }, [api, onIndexChange]);
 
   return (
     <Card className='border-none bg-transparent shadow-none'>
@@ -54,37 +60,49 @@ function FoodSlider({
         {/* Right Fade */}
         <div className='pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-background to-transparent' />
 
-        <motion.div
-          className={cn(
-            'flex w-max items-center gap-4',
-            'sm:gap-6',
-            'lg:gap-8'
-          )}
-          animate={{
-            x: ['0%', '-33.333%'],
+        <Carousel
+          setApi={setApi}
+          opts={{
+            align: 'center',
+            loop: true,
           }}
-          transition={{
-            duration: 18,
-            ease: 'linear',
-            repeat: Infinity,
-          }}
+          plugins={[plugin.current]}
+          className='w-full'
         >
-          {loopSlides.map((item, index) => {
-            const originalIndex =
-              index % foodSlides.length;
-
-            return (
-              <FoodSlide
-                key={`${item.id}-${index}`}
-                item={item}
-                active={
-                  originalIndex ===
-                  actualActiveIndex
-                }
-              />
-            );
-          })}
-        </motion.div>
+          <CarouselContent className='-ml-2 md:-ml-4'>
+            {foodSlides.map((item, index) => (
+              <CarouselItem
+                key={item.id}
+                className={`
+                  basis-[120px]
+                  sm:basis-[160px]
+                  lg:basis-[190px]
+                  pl-2
+                  md:pl-4
+                `}
+              >
+                <motion.div
+                  animate={{
+                    y:
+                      activeIndex === index
+                        ? -6
+                        : 0,
+                  }}
+                  transition={{
+                    duration: 0.4,
+                  }}
+                >
+                  <FoodSlide
+                    item={item}
+                    active={
+                      activeIndex === index
+                    }
+                  />
+                </motion.div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
       </CardContent>
     </Card>
   );

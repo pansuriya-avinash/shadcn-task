@@ -178,7 +178,6 @@ const Hero = () => {
             <FoodSlider
               activeIndex={activeIndex}
               onIndexChange={handleIndexChange}
-              isTransitioning={isTransitioning}
             />
           </div>
 

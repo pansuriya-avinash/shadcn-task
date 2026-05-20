@@ -14,22 +14,21 @@ interface FoodSlideProps {
   active: boolean;
 }
 
-function FoodSlide({ item, active }: FoodSlideProps) {
+function FoodSlide({
+  item,
+  active,
+}: FoodSlideProps) {
   return (
     <motion.div
       animate={{
         opacity: active ? 1 : 0.65,
-        y: active ? -6 : 0,
       }}
       transition={{
         duration: 0.45,
         ease: 'easeInOut',
       }}
       className={cn(
-        'relative flex shrink-0 items-center justify-center',
-        'min-w-[120px]',
-        'sm:min-w-[160px]',
-        'lg:min-w-[190px]'
+        'relative flex shrink-0 items-center justify-center'
       )}
     >
       {/* Background Shape */}
@@ -37,7 +36,9 @@ function FoodSlide({ item, active }: FoodSlideProps) {
         className={cn(
           'absolute bottom-1 left-1/2 -z-10',
           '-translate-x-1/2 transition-all duration-500',
-          active ? 'text-primary' : 'text-border'
+          active
+            ? 'text-primary'
+            : 'text-border'
         )}
       >
         <svg
@@ -57,13 +58,13 @@ function FoodSlide({ item, active }: FoodSlideProps) {
       <motion.div
         animate={{
           rotate: active ? 0 : -2,
-          scale: active ? 1.08 : 0.88,
+          // scale: active ? 1.08 : 0.88,
         }}
         transition={{
           duration: 0.4,
         }}
         className={cn(
-          'flex items-center justify-center',
+          'relative flex items-center justify-center',
           'h-20 w-20',
           'sm:h-28 sm:w-28',
           'lg:h-36 lg:w-36'
@@ -72,14 +73,9 @@ function FoodSlide({ item, active }: FoodSlideProps) {
         <Image
           src={item.image || placeholderImage}
           alt={item.title}
-          priority
-          width={220}
-          height={220}
-          className={cn(
-            'h-full w-full',
-            'object-cover',
-            'drop-shadow-xl'
-          )}
+          width={100}
+          height={100}
+          className='object-cover drop-shadow-xl'
         />
       </motion.div>
     </motion.div>
