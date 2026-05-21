@@ -26,7 +26,7 @@ const StarRating = ({ rating }: { rating: number }) => {
           <svg
             key={i}
             viewBox="0 0 20 20"
-            className="size-5 sm:size-6"
+            className="size-4 sm:size-5"
             aria-hidden="true"
           >
             <defs>
@@ -60,20 +60,20 @@ const StarRating = ({ rating }: { rating: number }) => {
 const TestimonialCard = ({ testimonial, className }: TestimonialCardProps) => {
   return (
     <motion.div
-      whileHover={{ y: -4, scale: 1.01 }}
-      transition={txSpring}
-      className={cn("w-full max-w-full", className)}
+      // whileHover={{ y: -4, scale: 1.01 }}
+      // transition={txSpring}
+      className={cn("h-full w-full max-w-full min-w-0 overflow-hidden", className)}
     >
       <Card
         className={cn(
-          "w-full h-62",
+          "flex h-full w-full flex-col",
           "overflow-hidden",
-          "bg-theme-card border border-primary",
-          "shadow-none",
+          "transition-colors duration-300 rounded-0 hover:border hover:border-primary bg-theme-card ",
+          "shadow-none"
         )}
       >
-        <CardContent className="p-5 sm:p-6">
-          <div className="flex items-center gap-3 mb-5">
+        <CardContent className="flex flex-1 flex-col p-5 sm:p-6">
+          <div className="mb-4 flex items-center gap-3 sm:mb-5">
             <Avatar
               className={cn(
                 "size-11 border border-border bg-secondary sm:size-12",
@@ -92,7 +92,7 @@ const TestimonialCard = ({ testimonial, className }: TestimonialCardProps) => {
 
           <StarRating rating={testimonial.rating} />
 
-          <p className="text-sm leading-relaxed text-card-foreground sm:text-base mt-4">
+          <p className="mt-4 flex-1 text-sm leading-relaxed text-card-foreground sm:mt-5 sm:text-base">
             {testimonial.feedback}
           </p>
         </CardContent>

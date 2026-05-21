@@ -2,8 +2,17 @@
 
 import * as React from "react";
 
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowLeft,
+  ArrowRight,
+} from "lucide-react";
+
+import {
+  Carousel,
+  CarouselApi,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 
 import { Button } from "@/components/ui/button";
 
@@ -11,48 +20,54 @@ import SectionHeading from "@/components/ui/section-heading";
 import TestimonialCard from "@/components/testimonial-card";
 
 import { cn } from "@/lib/utils";
-import { EASE_OUT_EXPO } from "@/lib/animation";
-import { SlideLeft, SlideRight } from "@/components/ui/motion";
+
+import {
+  SlideLeft,
+  SlideRight,
+} from "@/components/ui/motion";
+
 import { TESTIMONIALS } from "./constants/testimonials.constants";
 
 const Testimonials = () => {
-  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [api, setApi] =
+    React.useState<CarouselApi>();
 
   const handlePrevious = () => {
-    setCurrentIndex((prev) =>
-      prev - 2 < 0 ? Math.max(TESTIMONIALS.length - 2, 0) : prev - 2,
-    );
+    api?.scrollPrev();
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 2 >= TESTIMONIALS.length ? 0 : prev + 2));
+    api?.scrollNext();
   };
-
-  const visibleTestimonials = TESTIMONIALS.slice(
-    currentIndex,
-    currentIndex + 2,
-  );
 
   return (
     <section
       id="testimonials"
-      className={cn("w-full bg-background", "py-18 sm:py-24 lg:py-36")}
+      className={cn(
+        "w-full overflow-hidden bg-background",
+        "py-14 sm:py-20 lg:py-32"
+      )}
     >
-      <div className={cn("mx-auto max-w-7xl", "px-4 sm:px-6 lg:px-8")}>
+      <div
+        className={cn(
+          "mx-auto max-w-7xl",
+          "px-4 sm:px-6 lg:px-8"
+        )}
+      >
         <div
           className={cn(
-            "grid items-center gap-10",
-            "lg:grid-cols-[45%_55%]",
-            "lg:gap-16",
+            "grid min-w-0 items-center gap-10",
+            "lg:grid-cols-[30%_70%]",
+            "lg:gap-16"
           )}
         >
-          {/* ── Left column ───────────────────────────────────── */}
-          <SlideLeft className="space-y-8">
+          {/* Left */}
+          <SlideLeft className="flex flex-col space-y-6 sm:space-y-8">
             <SectionHeading
               align="start"
               eyebrow="Testimonials"
               title="Customers Feedback"
-              description="here's how our customers enjoyed our restaurant and the services we offer."
+              description="Here's how our customers enjoyed our restaurant and the services we offer."
               descriptionMaxWidth="4xl"
             />
 
@@ -60,51 +75,60 @@ const Testimonials = () => {
               <Button
                 className={cn(
                   "rounded-full",
-                  "bg-secondary text-secondary-foreground",
-                  "px-2.5 py-2.5 text-base font-medium",
+                  "border-none bg-secondary text-secondary-foreground",
+                  "px-3 py-3",
                   "shadow-lg shadow-secondary/20",
-                  "hover:bg-secondary/90",
+                  "hover:bg-secondary/90"
                 )}
                 onClick={handlePrevious}
+                aria-label="Previous testimonial"
               >
-                <ArrowLeft className="h-4 w-4" />
+                <ArrowLeft className="size-4" />
               </Button>
 
               <Button
                 className={cn(
                   "rounded-full",
-                  "bg-primary text-primary-foreground",
-                  "px-2.5 py-2.5 text-base font-medium",
+                  "border-none bg-primary text-primary-foreground",
+                  "px-3 py-3",
                   "shadow-lg shadow-primary/20",
-                  "hover:bg-primary/90",
+                  "hover:bg-primary/90"
                 )}
                 onClick={handleNext}
+                aria-label="Next testimonial"
               >
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="size-4" />
               </Button>
             </div>
           </SlideLeft>
 
-          {/* ── Right column — animated card grid ─────────────── */}
-          <SlideRight>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 24 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -24 }}
-                transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
-                className={cn("grid w-full gap-6", "md:grid-cols-2")}
-              >
-                {visibleTestimonials.map((testimonial) => (
-                  <TestimonialCard
+          {/* Right */}
+          <SlideRight className="mt-4 w-full min-w-0 lg:mt-0">
+            <Carousel
+              setApi={setApi}
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full min-w-0 overflow-hidden"
+            >
+              <CarouselContent className="ml-0">
+                {TESTIMONIALS.map((testimonial) => (
+                  <CarouselItem
                     key={testimonial.id}
-                    testimonial={testimonial}
-                    className="w-full max-w-full"
-                  />
+                    className={cn(
+                      "min-w-0 px-2",
+                      "basis-full md:basis-1/2"
+                    )}
+                  >
+                    <TestimonialCard
+                      testimonial={testimonial}
+                      className="h-full w-full"
+                    />
+                  </CarouselItem>
                 ))}
-              </motion.div>
-            </AnimatePresence>
+              </CarouselContent>
+            </Carousel>
           </SlideRight>
         </div>
       </div>
