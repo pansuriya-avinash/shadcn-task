@@ -110,7 +110,7 @@ const AboutUs = () => {
               )}
             >
               Read more
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <ArrowRight className="ml-2 h-4 w-4  transition-transform duration-300 group-hover:translate-x-1" />
             </Button>
           </motion.div>
         </FadeUp>

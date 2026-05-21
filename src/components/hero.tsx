@@ -135,7 +135,7 @@ const Hero = () => {
                   )}
                 >
                   Order now
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ml-2 h-4 w-4  transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
               </motion.div>
 
@@ -159,6 +159,7 @@ const Hero = () => {
                     "px-6 py-2",
                     "text-base font-medium",
                     "rounded-full",
+                    "border-0"
                   )}
                 >
                   Book table
