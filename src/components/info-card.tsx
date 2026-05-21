@@ -17,9 +17,11 @@ const InfoCard = ({
   return (
     <Card
       className={cn(
-        'border-0 rounded-none',
+        'border border-transparent rounded-none',
         'bg-background shadow-md shadow-black/5',
         'align-middle',
+        'hover:border-primary hover:shadow-none',
+        'transition-colors duration-300',
         className
       )}
     >

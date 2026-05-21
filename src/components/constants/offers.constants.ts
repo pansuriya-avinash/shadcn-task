@@ -12,6 +12,7 @@ export const OFFERS: Offer[] = [
     image: offerImage1,
     buttonText: "Book your table",
     isLarge: true,
+    position: "top-right",
   },
   {
     id: "2",
@@ -19,6 +20,7 @@ export const OFFERS: Offer[] = [
     image: offerImage2,
     buttonText: "Claim offer",
     isLarge: false,
+    position: "bottom-left",
   },
   {
     id: "3",
@@ -27,5 +29,6 @@ export const OFFERS: Offer[] = [
     image: offerImage3,
     buttonText: "Book your table",
     isLarge: false,
+    position: "top-right",
   },
 ];

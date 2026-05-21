@@ -8,6 +8,7 @@ export interface Offer {
   image: StaticImport;
   buttonText: string;
   isLarge?: boolean;
+  position?: "top-right" | "bottom-left";
 }
 
 export interface OfferCardProps {
