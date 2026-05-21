@@ -153,8 +153,8 @@ const Hero = () => {
                   size="lg"
                   className={cn(
                     "text-primary",
-                    "bg-primary/10",
-                    "hover:bg-primary/20",
+                    "bg-primary/20",
+                    "hover:bg-primary/30",
                     "hover:text-primary",
                     "px-6 py-2",
                     "text-base font-medium",

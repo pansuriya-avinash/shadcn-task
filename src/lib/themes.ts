@@ -113,8 +113,8 @@ export const darkTokens: ThemeTokens = {
   secondary             : "oklch(0.55 0.220 27.1 / 0.15)", /* hsla(356, 89%, 44%, 0.15) */
   "secondary-foreground": "oklch(0.71 0.167 18.3)",         /* hsla(356, 89%, 70%, 1)   */
 
-  muted            : "oklch(0.98 0.01 100.1)", 
-  "muted-foreground": "oklch(0.89 0.049 14.7)", /* hsla(357, 85%, 90%, 1)     */
+  muted            : "oklch(0.68 0.01 25)", 
+  "muted-foreground": "oklch(0.95 0.01 25.37)", 
 
   accent            : "oklch(0.28 0.037 260.0)", /* same as dark muted          */
   "accent-foreground": "oklch(0.98 0.003 247.9)", /* same as dark foreground    */
