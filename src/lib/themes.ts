@@ -37,8 +37,7 @@ export interface ThemeTokens {
 }
 
 const FONT_SANS =
-  '"Outfit", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, ' +
-  '"Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif';
+  '"Outfit", "Outfit Fallback"';
 
 const RADIUS = "0.625rem";
 

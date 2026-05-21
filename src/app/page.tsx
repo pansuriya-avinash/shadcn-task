@@ -16,7 +16,7 @@ import { Offers } from "@/components/offers"
           className={cn(
             "absolute bottom-0 left-0",
             "h-[2px] w-full",
-            "origin-left -rotate-1",
+            "origin-left -rotate-3",
             "bg-border"
           )}
         />
@@ -31,7 +31,7 @@ import { Offers } from "@/components/offers"
           className={cn(
             "absolute bottom-0 left-0",
             "h-[2px] w-full",
-            "origin-left -rotate-1",
+            "origin-left -rotate-3",
             "bg-border"
           )}
         />
